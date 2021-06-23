@@ -16,3 +16,19 @@
 
 - name: Ensure MariaDB is stopped after install
   meta: flush_handlers
+
+- name: Get MariaDB version
+  command: "{{ mariadb_mysql_binary }} --version"
+  register: mariadb_cli_version
+  changed_when: False
+  check_mode: False
+
+- name: Copy my.cnf global MariaDB configuration
+  template:
+    src: my.cnf.j2
+    dest: "{{ mariadb_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    force: "{{ mariadb_overwrite_global_mycnf }}"
+  notify: mariadb_restart

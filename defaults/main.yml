@@ -12,4 +12,6 @@ mariadb_packages:
 mariadb_requirements:
   - "{{ 'python3-mysqldb' if ansible_python.version.major == 3 else 'python-mysqldb' }}"
 
-
+mariadb_mysql_binary: /usr/bin/mysql
+mariadb_overwrite_global_mycnf: True
+mariadb_config_file: /etc/mysql/my.cnf
