@@ -62,3 +62,5 @@ mariadb_mysqldump_max_allowed_packet: "64M"
 mariadb_transaction_isolation_level: READ-COMMITTED
 mariadb_log_error: /var/log/mysql/error.log
 mariadb_config_include_files: []
+
+mariadb_log_file_group: adm
