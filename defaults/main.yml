@@ -58,3 +58,5 @@ mariadb_innodb_io_capacity: 200
 
 mariadb_sync_binlog: 1
 mariadb_mysqldump_max_allowed_packet: "64M"
+
+mariadb_transaction_isolation_level: READ-COMMITTED
