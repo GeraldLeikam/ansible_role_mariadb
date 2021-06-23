@@ -19,3 +19,4 @@ mariadb_config_file: /etc/mysql/my.cnf
 mariadb_port: "3306"
 mariadb_bind_address: "127.0.0.0"
 mariadb_socket: /var/run/mysqld/mysqld.sock
+mariadb_pid_file: /var/run/mysqld/mysqld.pid
