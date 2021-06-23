@@ -1,4 +1,6 @@
 ---
+mariadb_root_password: root
+
 mariadb_apt_cache_update: False
 
 mariadb_daemon: mariadb
