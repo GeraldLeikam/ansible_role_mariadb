@@ -6,7 +6,7 @@
     state: present
   loop: "{{ mariadb_packages_extra + mariadb_requirements }}"
 
-name: Ensure MariaDB packages are installed
+- name: Ensure MariaDB packages are installed
   package:
     name: "{{ item }}"
     update_cache: "{{ mariadb_apt_cache_update }}"
