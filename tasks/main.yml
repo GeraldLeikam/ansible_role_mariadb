@@ -112,3 +112,11 @@
     login_unix_socket: "{{ mariadb_socket }}"
   when: item in ['localhost', '127.0.0.1', '::1']
   loop: "{{ mariadb_root_hosts.stdout_lines | default([]) }}"
+
+- name: Copy .my.cnf file with root password credentials
+  template:
+    src: "root-my.cnf.j2"
+    dest: "/root/.my.cnf"
+    owner: root
+    group: root
+    mode: 0600
