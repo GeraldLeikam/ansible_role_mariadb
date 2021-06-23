@@ -83,3 +83,22 @@
     name: "{{ mariadb_daemon }}"
     state: started
     enabled: "{{ mariadb_enabled_on_startup }}"
+
+- name: Get list of hosts for the root user
+  command: '{{ mariadb_mysql_binary }} -NBe
+    "SELECT Host
+    FROM mysql.user
+    WHERE User = ''root''
+    ORDER BY (Host=''localhost'') ASC"'
+  register: mariadb_root_hosts
+  changed_when: False
+  check_mode: False
+
+- name: Disallow root login remotely
+  mysql_user:
+    name: "root"
+    host: "{{ item }}"
+    state: absent
+    login_unix_socket: "{{ mariadb_socket }}"
+  when: item not in ['localhost', '127.0.0.1', '::1']
+  loop: "{{ mariadb_root_hosts.stdout_lines | default([]) }}"
