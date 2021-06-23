@@ -64,3 +64,4 @@ mariadb_log_error: /var/log/mysql/error.log
 mariadb_config_include_files: []
 
 mariadb_log_file_group: adm
+mariadb_enabled_on_startup: True
