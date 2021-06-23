@@ -13,3 +13,6 @@
     state: present
   notify: mariadb_stopped
   loop: "{{ mariadb_packages }}"
+
+- name: Ensure MariaDB is stopped after install
+  meta: flush_handlers
