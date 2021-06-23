@@ -32,3 +32,26 @@
     mode: 0644
     force: "{{ mariadb_overwrite_global_mycnf }}"
   notify: mariadb_restart
+
+- name: Verify mariadb include directory exists
+  file:
+    path: "{{ mariadb_config_include_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    setype: mysqld_etc_t
+  when: mariadb_config_include_files | length > 0
+
+- name: Copy my.cnf override files into include directory
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ mariadb_config_include_dir }}/{{ item.src | basename }}"
+    owner: root
+    group: root
+    mode: 0644
+    force: "{{ item.force | default(False) }}"
+  loop: "{{ mariadb_config_include_files }}"
+  loop_control:
+    label: "{{ mariadb_config_include_dir }}/{{ item.src | basename }}"
+  notify: mariadb_restart
